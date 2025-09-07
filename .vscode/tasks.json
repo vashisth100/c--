@@ -1,0 +1,60 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "compile",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-o",
+                "${fileBasenameNoExtension}",
+                "${file}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "compile and run",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "g++ -std=c++17 -o \"${fileBasenameNoExtension}\" \"${file}\" && .\\${fileBasenameNoExtension} < input.txt > output.txt"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "compile and run (PowerShell)",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "g++ -std=c++17 -o '${fileBasenameNoExtension}' '${file}'; if ($LASTEXITCODE -eq 0) { Get-Content input.txt | .\\${fileBasenameNoExtension} | Out-File -FilePath output.txt -Encoding utf8 }"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "run with input/output",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                ".\\${fileBasenameNoExtension} < input.txt > output.txt"
+            ],
+            "group": "test",
+            "dependsOn": "compile"
+        }
+    ]
+}
