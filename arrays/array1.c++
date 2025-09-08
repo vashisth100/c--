@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int largestElement(int arr[], int n){
+int largestElement(int arr[], int n)
+{
     int large = arr[0];
     for (int i = 0; i < n; i++)
     {
@@ -13,7 +14,8 @@ int largestElement(int arr[], int n){
     return large;
 }
 
-int secondLargest(int arr[], int n){
+int secondLargest(int arr[], int n)
+{
     int large = arr[0], sLarge = -1;
 
     for (int i = 0; i < n; i++)
@@ -31,7 +33,8 @@ int secondLargest(int arr[], int n){
     return sLarge;
 }
 
-int secondSmallest(int arr[], int n){
+int secondSmallest(int arr[], int n)
+{
     int smallest = arr[0], secondSmall = INT_MAX;
     for (int i = 0; i < n; i++)
     {
@@ -48,7 +51,8 @@ int secondSmallest(int arr[], int n){
     return secondSmall;
 }
 
-bool isSorted(int arr[], int n){
+bool isSorted(int arr[], int n)
+{
     bool isSort = true;
     for (int i = 0; i < n - 1; i++)
     {
@@ -65,7 +69,8 @@ bool isSorted(int arr[], int n){
     return isSort;
 }
 
-void removeDuplicates(int arr[], int n){
+void removeDuplicates(int arr[], int n)
+{
     for (int i = 1; i <= n; i++)
     {
         if (arr[i] == arr[i - 1])
@@ -77,7 +82,8 @@ void removeDuplicates(int arr[], int n){
     }
 }
 
-void rotateArray1(int arr[], int n){
+void rotateArray1(int arr[], int n)
+{
     int temp = arr[0];
     for (int i = 1; i < n; i++)
     {
@@ -86,31 +92,110 @@ void rotateArray1(int arr[], int n){
     arr[n - 1] = temp;
 }
 
-void rotateArrayN(int arr[], int n, int d){
-    reverse(arr, arr+d);
-    reverse(arr+d, arr+n);
-    reverse(arr, arr+n);
+void rotateArrayByD(int arr[], int n, int d)
+{
+    reverse(arr, arr + d);
+    reverse(arr + d, arr + n);
+    reverse(arr, arr + n);
 }
 
-void moveZeroToEnd(int arr[], int n){
+void moveZeroToEnd(int arr[], int n)
+{
     int j = -1;
-    for(int i = 0; i <n; i++){
-        if(arr[i] == 0){
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] == 0)
+        {
             j = i;
             break;
         }
     }
 
-    if(j == -1) {
+    if (j == -1)
+    {
         return;
     }
-    
-    for(int i = j+1; i< n; i++){
-        if(arr[i] != 0){
+
+    for (int i = j + 1; i < n; i++)
+    {
+        if (arr[i] != 0)
+        {
             swap(arr[i], arr[j]);
             j++;
         }
     }
+}
+
+vector<int> intersectionArray(vector<int> &A, int n, vector<int> &B, int m)
+{
+    int i = 0;
+    int j = 0;
+    vector<int> ans;
+    while (i < n && j < m)
+    {
+        if (A[i] < B[j])
+        {
+            return;
+        }
+        else if (A[i] > B[j])
+        {
+            return;
+        }
+        else
+        {
+            ans.push_back(A[i]);
+            i++;
+            j++;
+        }
+    }
+    return ans;
+}
+
+vector<int> unionArray(vector<int> &A, vector<int> &B)
+{
+    int n = A.size();
+    int m = B.size();
+    int i = 0;
+    int j = 0;
+    vector<int> unionArr;
+    while (i < n && j < m)
+    {
+        if (A[i] <= B[j])
+        {
+            if (unionArr.size() == 0 || unionArr.back() != A[i])
+            {
+                unionArr.push_back(A[i]);
+            }
+            i++;
+        }
+        else
+        {
+            if (unionArr.size() == 0 || unionArr.back() != B[j])
+            {
+                unionArr.push_back(B[j]);
+            }
+            j++;
+        }
+    }
+
+    while (j < m)
+    {
+        if (unionArr.size() == 0 || unionArr.back() != B[j])
+        {
+            unionArr.push_back(B[j]);
+        }
+        j++;
+    }
+
+    while (i < n)
+    {
+        if (unionArr.size() == 0 || unionArr.back() != A[i])
+        {
+            unionArr.push_back(A[i]);
+        }
+        i++;
+    }
+    return unionArr;
 }
 
 void printArray(int arr[], int n)
@@ -122,17 +207,19 @@ void printArray(int arr[], int n)
     cout << endl;
 }
 
-int main(){
+int main()
+{
     int n;
     cin >> n;
 
     int arr[n];
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++)
+    {
         cin >> arr[i];
     }
 
     int d;
-    cin>>d;
+    cin >> d;
 
     moveZeroToEnd(arr, n);
     printArray(arr, n);
