@@ -198,6 +198,16 @@ vector<int> unionArray(vector<int> &A, vector<int> &B)
     return unionArr;
 }
 
+int missingNum(int arr[], int n){
+    int sum = (n*(n+1))/2;
+
+    int s2;
+    for(int i = 0; i < n-1; i++){
+        s2 += arr[i];
+    }
+    return sum-s2;
+}
+
 void printArray(int arr[], int n)
 {
     for (int i = 0; i < n; i++)
@@ -218,9 +228,9 @@ int main()
         cin >> arr[i];
     }
 
-    int d;
-    cin >> d;
+    // int d;
+    // cin >> d;
 
-    moveZeroToEnd(arr, n);
+    missingNum(arr, n);
     printArray(arr, n);
 }
