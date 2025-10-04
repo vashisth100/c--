@@ -51,5 +51,8 @@ int main()
     vector<int> arr = {12, 15, 16, 23, 25, 29, 33, 36};
     int n = 36;
 
-    cout << linear_search(arr, n);
+    cout << "After linear search the element was found at index: " << linear_search(arr, n);
 }
+
+
+

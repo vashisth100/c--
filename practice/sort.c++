@@ -23,6 +23,22 @@ void selection_sort(int arr[], int n){
     }
 }
 
+//picks th element and places it to its right position.
+//time complexity --> O(n^2) {worst, average}
+//        .->    --> O(n) {best}
+//space complexity -->O(1)
+void insertion_sort(int arr[], int n){
+    for(int i = 0; i <= n-1; i++){
+        int j = i;
+        while (j > 0 && arr[j-1] > arr[j]){
+            int temp = arr[j-1];
+            arr[j-1] = arr[j];
+            arr[j]= temp;
+            j--;
+        }
+    }
+}
+
 //compare adjacent element find if greater --> swap
 //time complexity --> O(n^2) {worst, average}
 //                --> O(n) {best}
@@ -40,22 +56,6 @@ void bubble_sort(int arr[], int n){
     }
 }
 
-//picks th element and places it to its right position.
-//time complexity --> O(n^2) {worst, average}
-//        .->    --> O(n) {best}
-//space complexity -->O(1)
-void insertion_sort(int arr[], int n){
-    for(int i = 0; i <= n-1; i++){
-        int j = i;
-        while (j > 0 && arr[j-1] > arr[j]){
-            int temp = arr[j-1];
-            arr[j-1] = arr[j];
-            arr[j]= temp;
-            j--;
-        }
-    }
-}
-
 int main(){
     int n;
     cin >> n;
@@ -65,8 +65,9 @@ int main(){
         cin>>arr[i];
     }
 
-    insertion_sort(arr, n);
+    bubble_sort(arr, n);
 
+    cout<< "after applying bubble sort ";
     for(int i = 0; i < n; i++){
         cout<<arr[i]<<" ";
     }
