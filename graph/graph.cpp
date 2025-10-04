@@ -1,5 +1,7 @@
 #include <iostream>
 #include <list>
+#include <vector>
+#include <queue>
 using namespace std;
 
 class Graph{
@@ -26,6 +28,47 @@ public:
             cout<<endl;
         }
     }
+
+    void bfs(){
+        queue<int> q;
+        vector<int> vis(V, 0);
+
+        q.push(0);
+        vis[0] = 1;
+
+        while(!q.empty()){
+            int u = q.front();
+            q.pop();
+
+            cout << u << " ";
+
+            for(auto v : l[u]){
+                if(!vis[v]){
+                    vis[v] = 1;
+                    q.push(v);
+                }
+            }
+        }
+        cout<<endl;
+    }
+
+    void dfsHelper(int u, vector<int> &vis){
+        cout<<u<<" ";
+        vis[u] = 1;
+        
+        for(auto v : l[u]){
+            if(!vis[v]){
+                dfsHelper(v, vis);
+            }
+        }
+    }
+    void dfs(){
+        int u = 0; 
+        vector<int> vis(V,0);
+
+        dfsHelper(u, vis);
+    }
+
 };
 
 
@@ -36,8 +79,9 @@ int main(){
     g.addEdge(0,1);
     g.addEdge(1,2);
     g.addEdge(1,3);
-    g.addEdge(2,3);
     g.addEdge(2,4);
 
-    g.print();
+    g.bfs();
+
+    g.dfs();
 }
